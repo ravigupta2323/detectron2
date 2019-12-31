@@ -228,7 +228,7 @@ class LRScheduler(HookBase):
 #         if self.trainer.iter % 2500 == 0:
 #             mlr *= 0.96
          
-        self._optimizer.param_groups[self._best_param_group_id]["lr"] = 1e-6
+
         
         lr = self._optimizer.param_groups[self._best_param_group_id]["lr"]
         self.trainer.storage.put_scalar("lr", lr, smoothing_hint=False)
