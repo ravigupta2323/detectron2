@@ -434,10 +434,18 @@ class DefaultTrainer(SimpleTrainer):
 
         It is not implemented by default.
         """
-        raise NotImplementedError(
-            "Please either implement `build_evaluator()` in subclasses, or pass "
-            "your evaluator as arguments to `DefaultTrainer.test()`."
-        )
+#         raise NotImplementedError(
+#             "Please either implement `build_evaluator()` in subclasses, or pass "
+#             "your evaluator as arguments to `DefaultTrainer.test()`."
+#         )
+
+        # Ravi : I am modifiding here to return COCOEvaluator by default. This will not work if you are 
+        # using a different dataset.
+        from detectron2.evaluation import COCOEvaluator
+
+        return COCOEvaluator(dataset_name, cfg, False, output_dir = cfg.OUTPUT_DIR)
+        
+        
 
     @classmethod
     def test(cls, cfg, model, evaluators=None):

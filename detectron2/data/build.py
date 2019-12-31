@@ -19,6 +19,7 @@ from . import samplers
 from .catalog import DatasetCatalog, MetadataCatalog
 from .common import DatasetFromList, MapDataset
 from .dataset_mapper import DatasetMapper
+from .dataset_mapper import DatasetMapperTest
 from .detection_utils import check_metadata_consistency
 
 """
@@ -396,7 +397,7 @@ def build_detection_test_loader(cfg, dataset_name, mapper=None):
 
     dataset = DatasetFromList(dataset_dicts)
     if mapper is None:
-        mapper = DatasetMapper(cfg, False)
+        mapper = DatasetMapperTest(cfg, False) #This was false by default. I changed it.
     dataset = MapDataset(dataset, mapper)
 
     sampler = samplers.InferenceSampler(len(dataset))
